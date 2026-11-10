@@ -1,0 +1,5 @@
+Model variant,KG,Cross-attention,Organ embedding,AUC-ROC,F1,Precision,Recall
+Full model,Yes,Yes,Yes,0.6111,0.4328,0.5913,0.3413
+Without KG,No,Yes,Yes,0.5253,0.5665,0.486,0.6789
+Without cross-attention,Yes,No,Yes,0.6109,0.4989,0.5671,0.4454
+Without organ embedding,Yes,Yes,No,0.6121,0.4862,0.5853,0.4158

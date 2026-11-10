@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Select Drug</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f6f8fb;
+
+    color: #1f2937;
+}
+
+
+.navbar {
+
+    height: 64px;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.navbar-inner {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 0 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.logo {
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #111827;
+}
+
+
+.back {
+
+    text-decoration: none;
+
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+
+.main {
+
+    max-width: 1000px;
+
+    margin: 40px auto;
+
+    padding: 0 20px;
+}
+
+
+.header {
+
+    margin-bottom: 25px;
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 27px;
+
+    color: #111827;
+}
+
+
+.header p {
+
+    margin-top: 7px;
+
+    color: #6b7280;
+}
+
+
+.card {
+
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.03);
+}
+
+
+.search-area {
+
+    padding: 18px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.search {
+
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.search:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,0.10);
+}
+
+
+.info {
+
+    margin-top: 10px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.table-container {
+
+    overflow-x: auto;
+
+    max-height: 650px;
+
+    overflow-y: auto;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+th {
+
+    position: sticky;
+
+    top: 0;
+
+    background: #f9fafb;
+
+    padding: 13px 16px;
+
+    text-align: left;
+
+    font-size: 13px;
+
+    color: #4b5563;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+td {
+
+    padding: 12px 16px;
+
+    border-bottom:
+        1px solid #f0f0f0;
+
+    font-size: 14px;
+}
+
+
+tr:hover td {
+
+    background: #fafafa;
+}
+
+
+.action-btn {
+
+    border:
+        1px solid #d1d5db;
+
+    background: white;
+
+    color: #374151;
+
+    border-radius: 6px;
+
+    padding: 6px 11px;
+
+    margin-right: 5px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+.action-btn:hover {
+
+    border-color: #2563eb;
+
+    color: #2563eb;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    <div class="navbar-inner">
+
+        <div class="logo">
+            Drug Toxicity Prediction
+        </div>
+
+        <a href="/" class="back">
+            Back to Prediction
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<div class="main">
+
+
+    <div class="header">
+
+        <h1>
+            Select a Drug
+        </h1>
+
+        <p>
+            Choose a drug to use as Drug A or Drug B.
+        </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+
+        <div class="search-area">
+
+            <input
+                id="search"
+                class="search"
+                type="text"
+                placeholder="Search by drug name or RxNorm ID..."
+            >
+
+            <div
+                id="info"
+                class="info">
+            </div>
+
+        </div>
+
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            RxNorm ID
+                        </th>
+
+                        <th>
+                            Drug Name
+                        </th>
+
+                        <th>
+                            Select
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="drugTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+// ============================================================
+// CURRENT SELECTION
+// ============================================================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectType =
+    params.get("select");
+
+
+const existingA =
+    params.get("drug_a");
+
+
+const existingB =
+    params.get("drug_b");
+
+
+
+let drugs = [];
+
+let filtered = [];
+
+
+// ============================================================
+// LOAD DRUGS
+// ============================================================
+
+async function loadDrugs() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/drugs-data"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load drugs"
+            );
+
+        }
+
+
+        drugs =
+            await response.json();
+
+
+        filtered =
+            drugs;
+
+
+        displayDrugs();
+
+
+    } catch (error) {
+
+        document.getElementById(
+            "info"
+        ).textContent =
+            "Could not load drug list.";
+
+    }
+
+}
+
+
+// ============================================================
+// DISPLAY DRUGS
+// ============================================================
+
+function displayDrugs() {
+
+    const table =
+        document.getElementById(
+            "drugTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    const visible =
+        filtered.slice(0, 200);
+
+
+    visible.forEach(
+        drug => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${drug.id}
+                </td>
+
+                <td>
+                    ${drug.name}
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn"
+                        onclick="selectDrug(
+                            '${drug.id}',
+                            'A'
+                        )">
+
+                        Drug A
+
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        onclick="selectDrug(
+                            '${drug.id}',
+                            'B'
+                        )">
+
+                        Drug B
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    document.getElementById(
+        "info"
+    ).textContent =
+
+        "Showing " +
+        visible.length +
+        " of " +
+        filtered.length +
+        " matching drugs.";
+
+}
+
+
+// ============================================================
+// SEARCH
+// ============================================================
+
+document
+.getElementById("search")
+.addEventListener(
+    "input",
+    function() {
+
+        const query =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        filtered =
+            drugs.filter(
+                drug =>
+
+                    String(drug.id)
+                        .toLowerCase()
+                        .includes(query)
+
+                    ||
+
+                    String(drug.name)
+                        .toLowerCase()
+                        .includes(query)
+            );
+
+
+        displayDrugs();
+
+    }
+);
+
+
+// ============================================================
+// SELECT DRUG
+//
+// IMPORTANT:
+// Preserve the other already-selected drug.
+// ============================================================
+
+function selectDrug(
+    id,
+    buttonType
+) {
+
+    let drugA =
+        existingA;
+
+    let drugB =
+        existingB;
+
+
+    // Page was opened for Drug A
+
+    if (selectType === "A") {
+
+        drugA = id;
+
+    }
+
+
+    // Page was opened for Drug B
+
+    else if (selectType === "B") {
+
+        drugB = id;
+
+    }
+
+
+    // No specific selection mode
+
+    else {
+
+        if (buttonType === "A") {
+
+            drugA = id;
+
+        }
+
+        if (buttonType === "B") {
+
+            drugB = id;
+
+        }
+
+    }
+
+
+    const newParams =
+        new URLSearchParams();
+
+
+    if (drugA) {
+
+        newParams.set(
+            "drug_a",
+            drugA
+        );
+
+    }
+
+
+    if (drugB) {
+
+        newParams.set(
+            "drug_b",
+            drugB
+        );
+
+    }
+
+
+    window.location.href =
+        "/?" +
+        newParams.toString();
+
+}
+
+
+loadDrugs();
+
+</script>
+
+</body>
+
+</html>

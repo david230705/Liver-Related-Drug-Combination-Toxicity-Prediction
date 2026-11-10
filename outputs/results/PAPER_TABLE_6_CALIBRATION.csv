@@ -1,0 +1,2 @@
+Model,Split,AUC-ROC,PR-AUC,Brier Score,ECE,Samples
+Full GCN + Cross-Attention + KG,Cold Drug Test,0.6111,0.5706,0.2414,0.0413,3369

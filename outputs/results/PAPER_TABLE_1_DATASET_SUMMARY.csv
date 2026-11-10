@@ -1,0 +1,13 @@
+Property,Value
+Drug pairs,"150,858"
+Positive liver-related pairs,"75,432"
+Negative pairs,"75,426"
+Positive / Negative ratio,50.00% / 50.00%
+Unique drugs,"1,865"
+Duplicate rows,0
+Missing SMILES,0
+Molecular graph node features,19
+KG embedding dimension,64
+Drugs represented in KG,"1,101 / 1,865"
+KG coverage,59.03%
+Zero-vector KG fallback,764 drugs

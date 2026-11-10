@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Drug Toxicity Prediction</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Arial, sans-serif;
+    background: #f6f8fb;
+    color: #1f2937;
+}
+
+.navbar {
+    height: 64px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    color: #2563eb;
+}
+
+.main {
+    max-width: 760px;
+    margin: 55px auto;
+    padding: 0 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 650;
+    color: #111827;
+}
+
+.header p {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 30px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.field {
+    margin-bottom: 22px;
+}
+
+.field-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 8px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.select-link {
+    border: none;
+    background: none;
+
+    color: #2563eb;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    padding: 0;
+}
+
+.select-link:hover {
+    text-decoration: underline;
+}
+
+input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    font-size: 15px;
+    color: #111827;
+
+    outline: none;
+    background: #fff;
+}
+
+input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,0.10);
+}
+
+.predict-btn {
+    width: 100%;
+    height: 46px;
+
+    margin-top: 4px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.predict-btn:hover {
+    background: #1d4ed8;
+}
+
+.result {
+    margin-top: 24px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    padding: 24px;
+
+    text-align: center;
+
+    background: #f9fafb;
+}
+
+.result-title {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.probability {
+    font-size: 36px;
+    font-weight: 700;
+
+    color: #111827;
+
+    margin: 6px 0;
+}
+
+.risk {
+    font-size: 15px;
+    color: #374151;
+}
+
+.error {
+    color: #b91c1c;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    .main {
+        margin-top: 30px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="navbar">
+
+    <div class="navbar-inner">
+
+        <div class="logo">
+            Drug Toxicity Prediction
+        </div>
+
+        <a href="/drugs" class="nav-link">
+            Browse Drugs
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="main">
+
+    <div class="header">
+
+        <h1>Drug Combination Toxicity</h1>
+
+        <p>
+            Predict liver toxicity risk for a combination of two drugs.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+
+        <!-- DRUG A -->
+
+        <div class="field">
+
+            <div class="field-header">
+
+                <label for="drugA">
+                    Drug A
+                </label>
+
+                <button
+                    class="select-link"
+                    onclick="openDrugSelector('A')">
+
+                    Select from list
+
+                </button>
+
+            </div>
+
+
+            <input
+                id="drugA"
+                type="text"
+                placeholder="Enter RxNorm ID"
+            >
+
+        </div>
+
+
+        <!-- DRUG B -->
+
+        <div class="field">
+
+            <div class="field-header">
+
+                <label for="drugB">
+                    Drug B
+                </label>
+
+                <button
+                    class="select-link"
+                    onclick="openDrugSelector('B')">
+
+                    Select from list
+
+                </button>
+
+            </div>
+
+
+            <input
+                id="drugB"
+                type="text"
+                placeholder="Enter RxNorm ID"
+            >
+
+        </div>
+
+
+        <!-- PREDICT -->
+
+        <button
+            class="predict-btn"
+            onclick="predictToxicity()">
+
+            Predict Toxicity
+
+        </button>
+
+
+        <!-- RESULT -->
+
+        <div
+            id="result"
+            class="result hidden">
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+// ============================================================
+// RESTORE SELECTED DRUGS FROM URL
+// ============================================================
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const selectedA =
+    params.get("drug_a");
+
+const selectedB =
+    params.get("drug_b");
+
+
+if (selectedA) {
+
+    document.getElementById("drugA").value =
+        selectedA;
+
+}
+
+
+if (selectedB) {
+
+    document.getElementById("drugB").value =
+        selectedB;
+
+}
+
+
+// ============================================================
+// OPEN DRUG SELECTION PAGE
+// PRESERVES BOTH CURRENT DRUGS
+// ============================================================
+
+function openDrugSelector(type) {
+
+    const currentA =
+        document.getElementById("drugA").value.trim();
+
+    const currentB =
+        document.getElementById("drugB").value.trim();
+
+
+    const selectorParams =
+        new URLSearchParams();
+
+
+    selectorParams.set(
+        "select",
+        type
+    );
+
+
+    if (currentA) {
+
+        selectorParams.set(
+            "drug_a",
+            currentA
+        );
+
+    }
+
+
+    if (currentB) {
+
+        selectorParams.set(
+            "drug_b",
+            currentB
+        );
+
+    }
+
+
+    window.location.href =
+        "/drugs?" +
+        selectorParams.toString();
+
+}
+
+
+// ============================================================
+// PREDICTION
+// ============================================================
+
+async function predictToxicity() {
+
+    const drugA =
+        document.getElementById("drugA")
+        .value
+        .trim();
+
+
+    const drugB =
+        document.getElementById("drugB")
+        .value
+        .trim();
+
+
+    if (!drugA || !drugB) {
+
+        alert(
+            "Please select or enter both drugs."
+        );
+
+        return;
+    }
+
+
+    const resultBox =
+        document.getElementById("result");
+
+
+    resultBox.classList.remove("hidden");
+
+
+    resultBox.innerHTML = `
+        <div class="result-title">
+            Running prediction...
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/predict",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        drug_a: drugA,
+
+                        drug_b: drugB
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        // ----------------------------------------------------
+        // BACKEND ERROR
+        // ----------------------------------------------------
+
+        if (!response.ok || data.error) {
+
+            resultBox.innerHTML = `
+                <div class="result-title error">
+                    ${data.error ||
+                      data.detail ||
+                      "Prediction failed."}
+                </div>
+            `;
+
+            return;
+        }
+
+
+        // Backend already returns probability as a percentage
+        // Example: 62.65 means 62.65%
+
+        const percentage =
+            Number(
+                data.toxicity_probability
+            ).toFixed(2);
+
+
+        resultBox.innerHTML = `
+
+            <div class="result-title">
+                Predicted Toxicity Probability
+            </div>
+
+            <div class="probability">
+                ${percentage}%
+            </div>
+
+            <div class="risk">
+                ${data.risk}
+            </div>
+
+        `;
+
+
+    } catch (error) {
+
+        resultBox.innerHTML = `
+
+            <div class="result-title error">
+                Could not connect to the prediction server.
+            </div>
+
+        `;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

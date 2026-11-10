@@ -1,0 +1,7 @@
+Split,Total Pairs,Positive,Negative
+Random Train,105600,52672,52928
+Random Validation,22629,11346,11283
+Random Test,22629,11414,11215
+Cold Train,74334,37837,36497
+Cold Validation,3266,1562,1704
+Cold Test,3369,1585,1784

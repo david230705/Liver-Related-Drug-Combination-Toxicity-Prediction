@@ -1,0 +1,14 @@
+Statistic,Value
+Total drug pairs,150858.0
+Positive pairs,75432.0
+Negative pairs,75426.0
+Positive percentage,50.0
+Negative percentage,50.0
+Unique drugs,1865.0
+Duplicate rows,0.0
+Missing Drug-A SMILES,0.0
+Missing Drug-B SMILES,0.0
+KG drug IDs,1865.0
+KG drugs with embeddings,1101.0
+KG missing / zero-vector,764.0
+KG coverage (%),59.03

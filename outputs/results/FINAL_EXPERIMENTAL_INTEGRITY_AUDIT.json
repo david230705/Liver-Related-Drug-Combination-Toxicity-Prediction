@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "No duplicate unordered pairs": true,
+    "No conflicting labels": true,
+    "Random train/validation pair separation": true,
+    "Random train/test pair separation": true,
+    "Random validation/test pair separation": true,
+    "Cold train/validation pair separation": true,
+    "Cold train/test pair separation": true,
+    "Cold validation/test pair separation": true,
+    "Cold train/validation drug separation": true,
+    "Cold train/test drug separation": true,
+    "Cold validation/test drug separation": true,
+    "No self-pairs": true,
+    "No missing SMILES": true,
+    "Random split count matches dataset": true,
+    "Cold split does not exceed dataset": true,
+    "Both classes present": true
+  },
+  "details": {
+    "duplicate_unordered_pairs": 0,
+    "conflicting_label_pairs": 0,
+    "random_train_validation_overlap": 0,
+    "random_train_test_overlap": 0,
+    "random_validation_test_overlap": 0,
+    "cold_train_validation_overlap": 0,
+    "cold_train_test_overlap": 0,
+    "cold_validation_test_overlap": 0,
+    "cold_train_validation_shared_drugs": 0,
+    "cold_train_test_shared_drugs": 0,
+    "cold_validation_test_shared_drugs": 0,
+    "self_pairs": 0,
+    "missing_smiles": 0,
+    "positive_samples": 75432,
+    "negative_samples": 75426,
+    "random_split_total": 150858,
+    "cold_split_total": 80969
+  }
+}

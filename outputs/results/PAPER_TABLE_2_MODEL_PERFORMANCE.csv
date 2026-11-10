@@ -1,0 +1,7 @@
+Model,Evaluation split,AUC-ROC,F1,Precision,Recall
+Full GCN + Cross-Attention + KG,Random,0.7821,0.6954,0.7352,0.6598
+Morgan + Logistic Regression,Random,0.8236,0.7499,0.7394,0.7606
+Morgan + Random Forest,Random,0.7108,0.6693,0.664,0.6747
+Full GCN + Cross-Attention + KG,Cold-drug,0.6111,0.4328,0.5913,0.3413
+Morgan + Logistic Regression,Cold-drug,0.5044,0.1746,0.4696,0.1073
+Morgan + Random Forest,Cold-drug,0.5299,0.1583,0.4675,0.0953

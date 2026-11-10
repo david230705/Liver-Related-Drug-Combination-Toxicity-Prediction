@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+*.log
+
+# Large datasets
+data/
+
+# Model checkpoints
+outputs/checkpoints/

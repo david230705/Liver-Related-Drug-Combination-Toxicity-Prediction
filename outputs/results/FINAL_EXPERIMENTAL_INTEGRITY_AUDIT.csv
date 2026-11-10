@@ -1,0 +1,17 @@
+Check,Status
+No duplicate unordered pairs,PASS
+No conflicting labels,PASS
+Random train/validation pair separation,PASS
+Random train/test pair separation,PASS
+Random validation/test pair separation,PASS
+Cold train/validation pair separation,PASS
+Cold train/test pair separation,PASS
+Cold validation/test pair separation,PASS
+Cold train/validation drug separation,PASS
+Cold train/test drug separation,PASS
+Cold validation/test drug separation,PASS
+No self-pairs,PASS
+No missing SMILES,PASS
+Random split count matches dataset,PASS
+Cold split does not exceed dataset,PASS
+Both classes present,PASS

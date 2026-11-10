@@ -1,0 +1,4 @@
+Confidence Group,Samples,Positive,Negative,AUC-ROC,PR-AUC,F1,Precision,Recall,Mean Probability,Mean Confidence
+Very Low Confidence,1463,769,694,0.527,0.5763,0.4775,0.5531,0.42,0.4848,0.1027
+Low Confidence,1719,760,959,0.5971,0.5608,0.3831,0.6689,0.2684,0.4002,0.302
+Moderate Confidence,187,56,131,0.6799,0.4544,0.3415,0.5385,0.25,0.338,0.4462

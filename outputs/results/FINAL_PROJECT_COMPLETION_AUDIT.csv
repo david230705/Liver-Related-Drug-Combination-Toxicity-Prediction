@@ -1,0 +1,60 @@
+Check,Status
+Final dataset,PASS
+Molecular graph records,PASS
+KG embeddings,PASS
+Random train,PASS
+Random validation,PASS
+Random test,PASS
+Cold train,PASS
+Cold validation,PASS
+Cold test,PASS
+Full cold checkpoint,PASS
+Full random checkpoint,PASS
+Final experiment results,PASS
+Final dataset statistics,PASS
+Final data splits,PASS
+Integrity audit,PASS
+Experiment manifest,PASS
+Random AUC figure,PASS
+Cold AUC figure,PASS
+Cold metrics figure,PASS
+Ablation figure,PASS
+Generalization figure,PASS
+Cold ROC curve,PASS
+Cold PR curve,PASS
+KG coverage analysis,PASS
+Confidence analysis,PASS
+"Dataset has 150,858 rows",PASS
+"Positive count = 75,432",PASS
+"Negative count = 75,426",PASS
+No missing Drug-A SMILES,PASS
+No missing Drug-B SMILES,PASS
+No duplicate rows,PASS
+No duplicate unordered drug pairs,PASS
+No self-pairs,PASS
+Random train/validation separation,PASS
+Random train/test separation,PASS
+Random validation/test separation,PASS
+Cold train/validation separation,PASS
+Cold train/test separation,PASS
+Cold validation/test separation,PASS
+Cold train/validation drug separation,PASS
+Cold train/test drug separation,PASS
+Cold validation/test drug separation,PASS
+Random splits cover full dataset,PASS
+Cold splits are subset of full dataset,PASS
+Final result table is non-empty,PASS
+Full random model result exists,PASS
+Full cold model result exists,PASS
+cold_threshold_analysis.csv,PASS
+cold_model_bootstrap_confidence_intervals.csv,PASS
+cold_model_calibration_bins.csv,PASS
+cold_test_roc_curve_data.csv,PASS
+cold_test_precision_recall_curve_data.csv,PASS
+PAPER_TABLE_5_BOOTSTRAP_CI.csv,PASS
+PAPER_TABLE_6_CALIBRATION.csv,PASS
+PAPER_TABLE_7_ROC_PR_SUMMARY.csv,PASS
+cold_model_performance_by_kg_coverage.csv,PASS
+cold_test_kg_coverage_distribution.csv,PASS
+cold_model_performance_by_confidence.csv,PASS
+cold_test_confidence_distribution.csv,PASS
